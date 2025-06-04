@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.aurora_technologies.crm3.R;
 import com.aurora_technologies.crm3.models.AuthResponse;
+import com.aurora_technologies.crm3.models.LoginRequest;
 import com.aurora_technologies.crm3.network.ApiClient;
 import com.aurora_technologies.crm3.network.ApiService;
 import com.aurora_technologies.crm3.utils.JwtUtils;
@@ -102,7 +103,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setEnabled(false);
 
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        Call<AuthResponse> call = apiService.login(email, password, role);
+        LoginRequest loginRequest = new LoginRequest(email, password, role);
+        Call<AuthResponse> call = apiService.login(loginRequest);
         call.enqueue(new Callback<AuthResponse>() {
             @Override
             public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {

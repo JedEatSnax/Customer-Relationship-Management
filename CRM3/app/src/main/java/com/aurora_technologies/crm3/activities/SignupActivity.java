@@ -3,6 +3,7 @@ package com.aurora_technologies.crm3.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.aurora_technologies.crm3.R;
 import com.aurora_technologies.crm3.models.AuthResponse;
+import com.aurora_technologies.crm3.models.RegisterRequest;
 import com.aurora_technologies.crm3.network.ApiClient;
 import com.aurora_technologies.crm3.network.ApiService;
 import com.aurora_technologies.crm3.utils.JwtUtils;
@@ -28,8 +30,8 @@ import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private TextInputLayout emailLayout, passwordLayout, confirmPasswordLayout;
-    private TextInputEditText emailEditText, passwordEditText, confirmPasswordEditText;
+    private TextInputLayout nameLayout, emailLayout, passwordLayout, confirmPasswordLayout;
+    private TextInputEditText nameEditText, emailEditText, passwordEditText, confirmPasswordEditText;
     private MaterialButton signupButton;
     private TextView toggleLoginText;
     private ProgressBar progressBar;
@@ -40,12 +42,16 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        nameLayout = findViewById(R.id.tilName);
         emailLayout = findViewById(R.id.tilEmail);
         passwordLayout = findViewById(R.id.tilPassword);
         confirmPasswordLayout = findViewById(R.id.tilConfirmPassword);
+
+        nameEditText = findViewById(R.id.etName);
         emailEditText = findViewById(R.id.etEmail);
         passwordEditText = findViewById(R.id.etPassword);
         confirmPasswordEditText = findViewById(R.id.etConfirmPassword);
+
         signupButton = findViewById(R.id.btnSignup);
         toggleLoginText = findViewById(R.id.tvToggleLogin);
         progressBar = findViewById(R.id.progressBar);
@@ -61,10 +67,13 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void attemptSignup() {
+        // Reset errors
+        nameLayout.setError(null);
         emailLayout.setError(null);
         passwordLayout.setError(null);
         confirmPasswordLayout.setError(null);
 
+        String name = nameEditText.getText() != null ? nameEditText.getText().toString().trim() : "";
         String email = emailEditText.getText() != null ? emailEditText.getText().toString().trim() : "";
         String password = passwordEditText.getText() != null ? passwordEditText.getText().toString() : "";
         String confirmPassword = confirmPasswordEditText.getText() != null ? confirmPasswordEditText.getText().toString() : "";
@@ -79,10 +88,15 @@ public class SignupActivity extends AppCompatActivity {
 
         boolean cancel = false;
 
+        if (TextUtils.isEmpty(name)) {
+            nameLayout.setError("Name is required");
+            cancel = true;
+        }
+
         if (TextUtils.isEmpty(email)) {
             emailLayout.setError("Email is required");
             cancel = true;
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailLayout.setError("Invalid email address");
             cancel = true;
         }
@@ -116,7 +130,9 @@ public class SignupActivity extends AppCompatActivity {
         signupButton.setEnabled(false);
 
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        Call<AuthResponse> call = apiService.register(email, password, role);
+
+        RegisterRequest registerRequest = new RegisterRequest(name, email, password, role);
+        Call<AuthResponse> call = apiService.register(registerRequest);
         call.enqueue(new Callback<AuthResponse>() {
             @Override
             public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {

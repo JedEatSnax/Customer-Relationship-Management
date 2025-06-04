@@ -4,6 +4,9 @@ const Sales = require('./Sales');
 const Activity = require('./Activity');
 const Notification = require('./Notification');
 const Customer = require('./Customer');
+const express = require('express');
+const app = express();
+
 
 // Associations
 
@@ -38,6 +41,7 @@ Notification.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 // Lead - Customer
 Lead.belongsTo(Customer, { foreignKey: 'customerId', as: 'customer' });
 Customer.hasMany(Lead, { foreignKey: 'customerId', as: 'leads' });
+
 
 module.exports = {
   User,

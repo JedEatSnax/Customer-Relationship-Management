@@ -4,12 +4,15 @@ import com.aurora_technologies.crm3.models.AuthResponse;
 import com.aurora_technologies.crm3.models.Lead;
 import com.aurora_technologies.crm3.models.Report;
 import com.aurora_technologies.crm3.models.User;
+import com.aurora_technologies.crm3.models.RegisterRequest;
+import com.aurora_technologies.crm3.models.LoginRequest;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -21,14 +24,10 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     @POST("/api/auth/login")
-    Call<AuthResponse> login(@Query("email") String email,
-                             @Query("password") String password,
-                             @Query("role") String role);
+    Call<AuthResponse> login(@Body LoginRequest loginRequest);
 
     @POST("/api/auth/register")
-    Call<AuthResponse> register(@Query("email") String email,
-                                @Query("password") String password,
-                                @Query("role") String role);
+    Call<AuthResponse> register(@Body RegisterRequest registerRequest);
 
     @GET("/api/leads")
     Call<List<Lead>> getLeads();
