@@ -54,7 +54,7 @@ crm-backend/
 ### Installation
 
 ```bash
-git clone https://github.com/your-org/crm-backend.git
+git clone https://github.com/Wiii-1/Customer-Relationship-Management.git
 cd crm-backend
 npm install
 ```
