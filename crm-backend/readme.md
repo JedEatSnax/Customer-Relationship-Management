@@ -1,6 +1,6 @@
 # CRM Backend
 
-A robust Node.js backend for a Customer Relationship Management (CRM) system, providing secure APIs for managing customers, leads, sales activities, reporting, and user authentication. Built with modular architecture for scalability and maintainability.
+A robust Node.js backend for the **Computer Relationship Management System with Data Aggregation for Aurora Technologies** system, providing secure APIs for managing customers, leads, sales activities, reporting, and user authentication. Built with modular architecture for scalability and maintainability.
 
 ---
 
@@ -29,7 +29,7 @@ crm-backend/
 ├── .env              # Environment variables
 ├── .gitignore        # Git ignore rules
 ├── package.json      # Project metadata and dependencies
-├── server.js         # Application entry point
+└── server.js         # Application entry point
 ```
 
 ### Folder/File Descriptions
@@ -51,10 +51,10 @@ crm-backend/
 - Node.js (v14+)
 - MongoDB instance
 
-### Installation
+### Installation (Using VS Code or othe IDEs)
+
 
 ```bash
-git clone https://github.com/Wiii-1/Customer-Relationship-Management.git
 cd crm-backend
 npm install
 ```
@@ -158,13 +158,3 @@ Content-Type: application/json
     "status": "New"
 }
 ```
-
----
-
-## Contribution
-
-Contributions are welcome! Please fork the repository, create a feature branch, and submit a pull request. Ensure code style and tests are followed.
-
----
-
-

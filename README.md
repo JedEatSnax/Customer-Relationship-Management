@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This repository contains the source code and documentation for the **Customer Relationship Management (CRM3)** system. The project is designed to help organizations manage customer data, track interactions, and improve business relationships.
+This repository contains the source code and documentation for the **Computer Relationship Management System with Data Aggregation for Aurora Technologies** system. The project is designed to help organizations manage customer data, track interactions, and improve business relationships.
 
 ## Folder Structure
 
@@ -12,8 +12,7 @@ This repository contains the source code and documentation for the **Customer Re
 ├── src/                # Source code for the CRM application
 ├── docs/               # Project documentation
 ├── assets/             # Images, icons, and other assets
-├── tests/              # Unit and integration tests
-└── readme.md           # Project overview and instructions
+└── tests/              # Unit and integration tests
 ```
 
 ## Features
@@ -40,17 +39,9 @@ This repository contains the source code and documentation for the **Customer Re
 
 ## Getting Started
 
-1. Clone the repository:
+1. Clone or fork the repository:
     ```bash
-    git clone https://github.com/your-org/CRM3.git
+    git clone https://github.com/Wiii-1/Customer-Relationship-Management.git
     ```
-2. Follow the setup instructions in `/docs/setup.md`.
-3. Download and install **Android Oreo 8.0** for mobile testing.
-
-## Contributing
-
-See `/docs/contributing.md` for guidelines.
-
-## License
-
-This project is licensed under the MIT License.
+2. Download and install **Android Oreo 8.0** for mobile testing.
+3. Android Studio version must be Meerkat 2024.3.2 and above.
